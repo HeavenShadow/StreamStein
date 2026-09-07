@@ -20,3 +20,9 @@ Thumbs.db
 desktop.ini
 .vscode/
 .cursor/
+
+# Local AI-assistant instructions (never commit)
+AGENTS.md
+SOUL.md
+.hermes.md
+CLAUDE.md
