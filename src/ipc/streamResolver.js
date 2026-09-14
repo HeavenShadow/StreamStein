@@ -9,7 +9,7 @@ const { scheduleEmbedAutomation } = require("./embedAutomation");
 const RESOLVE_TIMEOUT_MS = 55000;
 const EARLY_SETTLE_MS = 2200;
 // Keep aligned with src/utils/api.js PLAYER_SOURCES (Jun 2026 upstream domain migrations).
-const SOURCE_ORDER_DEFAULT = ["videasy", "vidsrc", "vidking"];
+const SOURCE_ORDER_DEFAULT = ["videasy", "vidsrc", "vixsrc", "vidking"];
 
 const EMBED_URLS = {
   videasy: {
@@ -21,6 +21,11 @@ const EMBED_URLS = {
     tv: (id, season, ep) =>
       `https://vsembed.su/embed/tv/${id}/${season}/${ep}`,
     movie: (id) => `https://vsembed.su/embed/movie/${id}`,
+  },
+  vixsrc: {
+    tv: (id, season, ep) =>
+      `https://vixsrc.to/tv/${id}/${season}/${ep}`,
+    movie: (id) => `https://vixsrc.to/movie/${id}`,
   },
   vidking: {
     tv: (id, season, ep) =>

@@ -126,6 +126,7 @@ export const tmdbFetch = async (path, apiKey) => {
 // https://www.videasy.to/docs
 // https://vsembed.su/api/
 // https://www.vidking.net/#documentation
+// https://vixsrc.to/
 
 const SOURCE_ALIASES = {
   "2embed": "vidking",
@@ -164,6 +165,20 @@ export const PLAYER_SOURCES = [
     movieUrl: (id) => `https://vsembed.su/embed/movie/${id}`,
     tvUrl: (id, season, ep) =>
       `https://vsembed.su/embed/tv/${id}/${season}/${ep}`,
+  },
+  {
+    id: "vixsrc",
+    label: "VixSrc",
+    tag: null,
+    note: null,
+    supportsProgress: true,
+    progressViaFrames: true, // video is in a nested iframe, needs main-process frame query
+    colorParam: null,
+    langParam: null,
+    params: {},
+    movieUrl: (id) => `https://vixsrc.to/movie/${id}`,
+    tvUrl: (id, season, ep) =>
+      `https://vixsrc.to/tv/${id}/${season}/${ep}`,
   },
   {
     id: "vidking",
@@ -250,7 +265,7 @@ export const getNextNonAsyncSource = (currentId) => {
 };
 
 // Sources that require a transparent webRequest intercept to load properly
-export const NEEDS_INTERCEPT = ["vidsrc"];
+export const NEEDS_INTERCEPT = ["vidsrc", "vixsrc"];
 
 // ── AniList API (anime metadata) ──────────────────────────────────────────────
 const ANILIST_API = "https://graphql.anilist.co";

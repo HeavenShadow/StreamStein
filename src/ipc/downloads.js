@@ -1140,6 +1140,10 @@ const PLAYER_ACCESS_HEADERS = {
     Origin: "https://vsembed.su",
     Referer: "https://vsembed.su/",
   },
+  vixsrc: {
+    Origin: "https://vixsrc.to",
+    Referer: "https://vixsrc.to/",
+  },
   vidking: {
     Origin: "https://www.vidking.net",
     Referer: "https://www.vidking.net/",

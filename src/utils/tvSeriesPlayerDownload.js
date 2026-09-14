@@ -12,7 +12,7 @@ const PLAY_TIMEOUT_MS = 120000;
 const POST_LOAD_PLAY_MS = 2500;
 
 /** Videasy first — matches manual flow and avoids VidSrc empty embeds. */
-const SOURCE_PRIORITY = ["videasy", "vidsrc", "vidking", "2embed"];
+const SOURCE_PRIORITY = ["videasy", "vidsrc", "vixsrc", "vidking", "2embed"];
 
 function sortSources(sources) {
   const list = [...(sources || [])];
