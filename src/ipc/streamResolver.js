@@ -9,14 +9,15 @@ const { scheduleEmbedAutomation } = require("./embedAutomation");
 const RESOLVE_TIMEOUT_MS = 55000;
 const EARLY_SETTLE_MS = 2200;
 // Keep aligned with src/utils/api.js PLAYER_SOURCES (Jun 2026 upstream domain migrations).
-const SOURCE_ORDER_DEFAULT = ["videasy", "vidsrc", "vixsrc", "vidking"];
+const SOURCE_ORDER_DEFAULT = [
+  "vidsrc",
+  "vixsrc",
+  "vidsrcsu",
+  "vidsrcto",
+  "2embed",
+];
 
 const EMBED_URLS = {
-  videasy: {
-    tv: (id, season, ep) =>
-      `https://player.videasy.to/tv/${id}/${season}/${ep}`,
-    movie: (id) => `https://player.videasy.to/movie/${id}`,
-  },
   vidsrc: {
     tv: (id, season, ep) =>
       `https://vsembed.su/embed/tv/${id}/${season}/${ep}`,
@@ -27,10 +28,20 @@ const EMBED_URLS = {
       `https://vixsrc.to/tv/${id}/${season}/${ep}`,
     movie: (id) => `https://vixsrc.to/movie/${id}`,
   },
-  vidking: {
+  vidsrcsu: {
     tv: (id, season, ep) =>
-      `https://www.vidking.net/embed/tv/${id}/${season}/${ep}`,
-    movie: (id) => `https://www.vidking.net/embed/movie/${id}`,
+      `https://vidsrc.su/embed/tv/${id}/${season}/${ep}`,
+    movie: (id) => `https://vidsrc.su/embed/movie/${id}`,
+  },
+  vidsrcto: {
+    tv: (id, season, ep) =>
+      `https://vidsrc.to/embed/tv/${id}/${season}/${ep}`,
+    movie: (id) => `https://vidsrc.to/embed/movie/${id}`,
+  },
+  "2embed": {
+    tv: (id, season, ep) =>
+      `https://2embed.stream/embed/tv/${id}/${season}/${ep}`,
+    movie: (id) => `https://2embed.stream/embed/movie/${id}`,
   },
 };
 

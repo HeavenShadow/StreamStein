@@ -1132,10 +1132,6 @@ function downloadSubtitleFile(url, destPath) {
 
 // Player Origin/Referer for CDN fetches (keep in sync with src/utils/api.js).
 const PLAYER_ACCESS_HEADERS = {
-  videasy: {
-    Origin: "https://player.videasy.to",
-    Referer: "https://player.videasy.to/",
-  },
   vidsrc: {
     Origin: "https://vsembed.su",
     Referer: "https://vsembed.su/",
@@ -1144,19 +1140,23 @@ const PLAYER_ACCESS_HEADERS = {
     Origin: "https://vixsrc.to",
     Referer: "https://vixsrc.to/",
   },
-  vidking: {
-    Origin: "https://www.vidking.net",
-    Referer: "https://www.vidking.net/",
+  vidsrcsu: {
+    Origin: "https://vidsrc.su",
+    Referer: "https://vidsrc.su/",
+  },
+  vidsrcto: {
+    Origin: "https://vidsrc.to",
+    Referer: "https://vidsrc.to/",
   },
   "2embed": {
-    Origin: "https://www.vidking.net",
-    Referer: "https://www.vidking.net/",
+    Origin: "https://2embed.stream",
+    Referer: "https://2embed.stream/",
   },
 };
 
 function resolvePlayerAccessHeaders(sourceId) {
-  const key = String(sourceId || "videasy").toLowerCase();
-  return PLAYER_ACCESS_HEADERS[key] || PLAYER_ACCESS_HEADERS.videasy;
+  const key = String(sourceId || "vidsrc").toLowerCase();
+  return PLAYER_ACCESS_HEADERS[key] || PLAYER_ACCESS_HEADERS.vidsrc;
 }
 
 function buildVidDlSpawnEnv() {
@@ -1356,7 +1356,7 @@ async function spawnDownloadProcess(
 
   const logPath = downloads[idx0].logPath;
   const resolvedSource =
-    sourceId || downloads[idx0].sourceId || "videasy";
+    sourceId || downloads[idx0].sourceId || "vidsrc";
   const headersFromCapture =
     streamHeaders || downloads[idx0].streamHeaders || {};
 
@@ -1702,7 +1702,7 @@ function enqueueDownload({
     sourceId ||
     resolveContext?.sourceId ||
     resolveContext?.sources?.[0] ||
-    "videasy";
+    "vidsrc";
   const normalizedStreamHeaders =
     streamHeaders && typeof streamHeaders === "object" ? streamHeaders : {};
 

@@ -23,7 +23,7 @@ const StreamCaptureContext = createContext(null);
 
 const RESOLVE_TIMEOUT_MS = 75000;
 const URL_SETTLE_MS = 3200;
-const DEFAULT_SOURCES = ["videasy", "vidsrc"];
+const DEFAULT_SOURCES = ["vidsrc", "vixsrc"];
 
 function delay(ms) {
   return new Promise((r) => setTimeout(r, ms));

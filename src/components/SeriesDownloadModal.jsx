@@ -3,8 +3,8 @@ import { CloseIcon, DownloadIcon, ChevronRightIcon } from "./Icons";
 import { storage, STORAGE_KEYS } from "../utils/storage";
 import { imgUrl } from "../utils/api";
 
-const DEFAULT_SOURCES = ["videasy", "vidsrc"];
-const SOURCE_ORDER = ["videasy", "vidsrc", "vidking", "2embed"];
+const DEFAULT_SOURCES = ["vidsrc", "vixsrc"];
+const SOURCE_ORDER = ["vidsrc", "vixsrc", "vidsrcsu", "vidsrcto", "2embed"];
 
 function sortSeriesSources(list) {
   return [...list].sort(
@@ -447,7 +447,7 @@ export default function SeriesDownloadModal({
                   Sources
                 </span>
                 <div className="series-download-modal__sources">
-                  {["videasy", "vidsrc"].map((id) => (
+                  {["vidsrc", "vixsrc", "vidsrcsu", "vidsrcto", "2embed"].map((id) => (
                     <label key={id} className="series-download-modal__chip">
                       <input
                         type="checkbox"
@@ -455,7 +455,15 @@ export default function SeriesDownloadModal({
                         onChange={() => toggleSource(id)}
                         disabled={busy}
                       />
-                      {id === "videasy" ? "Videasy" : "VidSrc"}
+                      {id === "vidsrc"
+                        ? "VidSrc"
+                        : id === "vixsrc"
+                          ? "VixSrc"
+                          : id === "vidsrcsu"
+                            ? "VidSrc.su"
+                            : id === "vidsrcto"
+                              ? "VidSrc.to"
+                              : "2Embed"}
                     </label>
                   ))}
                 </div>

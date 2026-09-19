@@ -123,35 +123,19 @@ export const tmdbFetch = async (path, apiKey) => {
 };
 
 // Documentation:
-// https://www.videasy.to/docs
 // https://vsembed.su/api/
-// https://www.vidking.net/#documentation
 // https://vixsrc.to/
+// https://vidsrc.su/
+// https://vidsrc.to/
+// https://2embed.stream/
 
-const SOURCE_ALIASES = {
-  "2embed": "vidking",
-};
+const SOURCE_ALIASES = {};
 
 export const normalizeSourceId = (sourceId) => SOURCE_ALIASES[sourceId] || sourceId;
 
 // ── Player Sources ────────────────────────────────────────────────────────────
 // supportsProgress: true = executeJavaScript tracking works for this source
 export const PLAYER_SOURCES = [
-  {
-    id: "videasy",
-    label: "Videasy",
-    tag: null,
-    note: null,
-    supportsProgress: true,
-    colorParam: "color",
-    langParam: null,
-    params: {
-      overlay: "true",
-    },
-    movieUrl: (id) => `https://player.videasy.to/movie/${id}`,
-    tvUrl: (id, season, ep) =>
-      `https://player.videasy.to/tv/${id}/${season}/${ep}`,
-  },
   {
     id: "vidsrc",
     label: "VidSrc",
@@ -181,19 +165,46 @@ export const PLAYER_SOURCES = [
       `https://vixsrc.to/tv/${id}/${season}/${ep}`,
   },
   {
-    id: "vidking",
-    label: "Vidking",
+    id: "vidsrcsu",
+    label: "VidSrc.su",
     tag: null,
     note: null,
     supportsProgress: true,
-    colorParam: "color",
+    progressViaFrames: true,
+    colorParam: null,
     langParam: null,
-    params: {
-      autoPlay: "true",
-    },
-    movieUrl: (id) => `https://www.vidking.net/embed/movie/${id}`,
+    params: {},
+    movieUrl: (id) => `https://vidsrc.su/embed/movie/${id}`,
     tvUrl: (id, season, ep) =>
-      `https://www.vidking.net/embed/tv/${id}/${season}/${ep}`,
+      `https://vidsrc.su/embed/tv/${id}/${season}/${ep}`,
+  },
+  {
+    id: "vidsrcto",
+    label: "VidSrc.to",
+    tag: null,
+    note: null,
+    supportsProgress: true,
+    progressViaFrames: true,
+    colorParam: null,
+    langParam: null,
+    params: {},
+    movieUrl: (id) => `https://vidsrc.to/embed/movie/${id}`,
+    tvUrl: (id, season, ep) =>
+      `https://vidsrc.to/embed/tv/${id}/${season}/${ep}`,
+  },
+  {
+    id: "2embed",
+    label: "2Embed",
+    tag: null,
+    note: null,
+    supportsProgress: true,
+    progressViaFrames: true, // video is in a nested iframe, needs main-process frame query
+    colorParam: null,
+    langParam: null,
+    params: {},
+    movieUrl: (id) => `https://2embed.stream/embed/movie/${id}`,
+    tvUrl: (id, season, ep) =>
+      `https://2embed.stream/embed/tv/${id}/${season}/${ep}`,
   },
   {
     id: "allmanga",
@@ -265,7 +276,13 @@ export const getNextNonAsyncSource = (currentId) => {
 };
 
 // Sources that require a transparent webRequest intercept to load properly
-export const NEEDS_INTERCEPT = ["vidsrc", "vixsrc"];
+export const NEEDS_INTERCEPT = [
+  "vidsrc",
+  "vixsrc",
+  "vidsrcsu",
+  "vidsrcto",
+  "2embed",
+];
 
 // ── AniList API (anime metadata) ──────────────────────────────────────────────
 const ANILIST_API = "https://graphql.anilist.co";
@@ -476,7 +493,7 @@ export const isAnimeContent = (item, details) => {
 
 // Default sources
 export const ANIME_DEFAULT_SOURCE = "allmanga";
-export const NON_ANIME_DEFAULT_SOURCE = "vidking";
+export const NON_ANIME_DEFAULT_SOURCE = "vidsrc";
 
 // ── Episode Group fetch (localStorage + in-memory cache, 7-day TTL) ─────────
 // Episode groups almost never change -> cache aggressively across sessions.

@@ -11,8 +11,8 @@ const LOAD_TIMEOUT_MS = 90000;
 const PLAY_TIMEOUT_MS = 120000;
 const POST_LOAD_PLAY_MS = 2500;
 
-/** Videasy first — matches manual flow and avoids VidSrc empty embeds. */
-const SOURCE_PRIORITY = ["videasy", "vidsrc", "vixsrc", "vidking", "2embed"];
+/** VidSrc first — matches manual flow. */
+const SOURCE_PRIORITY = ["vidsrc", "vixsrc", "vidsrcsu", "vidsrcto", "2embed"];
 
 function sortSources(sources) {
   const list = [...(sources || [])];
@@ -145,7 +145,7 @@ export async function runTvSeriesPlayerDownload(tv, job, deps) {
       : sortSources(
           job.sources?.length > 0
             ? job.sources
-            : [tv.playerSource || "videasy"],
+            : [tv.playerSource || "vidsrc"],
         );
 
     for (let i = 0; i < job.episodes.length; i++) {
